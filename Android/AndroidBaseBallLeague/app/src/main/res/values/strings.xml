@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ABL</string>
     <string name="teams">Teams</string>
+    <string name="team_logo">logo of the team</string>
 </resources>

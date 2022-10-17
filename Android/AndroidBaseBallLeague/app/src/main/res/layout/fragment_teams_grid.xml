@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--    tools:listitem="@layout/teams_grid_item" - item(element) for grid-->
+<androidx.recyclerview.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/teamsGrid"
+    android:name="dev.mfazio.androidbaseballleague.team.TeamsFragment"
+    android:layout_gravity="center"
+    tools:context="dev.mfazio.androidbaseballleague.team.TeamsFragment"
+    tools:listitem="@layout/teams_grid_item">
+
+</androidx.recyclerview.widget.RecyclerView>

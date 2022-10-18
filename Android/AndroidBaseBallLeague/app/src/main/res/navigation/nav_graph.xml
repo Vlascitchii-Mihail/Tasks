@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/teamsFragment"
-        android:name="dev.mfazio.androidbaseballleague.TeamsFragment"
+        android:name="dev.mfazio.androidbaseballleague.team.TeamsFragment"
         android:label="@string/teams"/>
 
 </navigation>

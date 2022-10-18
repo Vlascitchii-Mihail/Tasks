@@ -12,5 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+<!--        Теги работают вместе чтобы строка состояния отображалась поверх панели навигации но с цветами панели навигации -->
+
+<!--        Флаг, указывающий, отвечает ли это окно за отрисовку фона системных баров.
+Если установлено значение true и окно не является плавающим, системные панели рисуются
+с прозрачным фоном, а соответствующие области в этом окне заполняются цветами-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+<!--        Флаг, указывающий, запрашивает ли это окно полупрозрачную строку состояния-->
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>

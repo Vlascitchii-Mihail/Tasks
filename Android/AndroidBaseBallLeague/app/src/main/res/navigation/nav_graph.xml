@@ -10,6 +10,10 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/teamsFragment">
 
+    <!--    adding the fragment and his ID in navigation
+android:name - name of the package and the class
+android:label - XML files
+ android:id - ID from the menu navigation.xml-->
     <fragment
         android:id="@+id/teamsFragment"
         android:name="dev.mfazio.androidbaseballleague.team.TeamsFragment"

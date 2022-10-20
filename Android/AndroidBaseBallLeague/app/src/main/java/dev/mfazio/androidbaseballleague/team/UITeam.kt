@@ -39,5 +39,10 @@ data class UITeam(
                 UITeam(Team.Waukesha, R.drawable.fi_ic_electric_guitar, R.color.waukeshaPrimary, R.color.waukeshaSecondary, R.color.waukeshaTertiary),
                 UITeam(Team.WisconsinRapids, R.drawable.fi_ic_cranberry, R.color.wiRapidsPrimary, R.color.wiRapidsSecondary, R.color.wiRapidsTertiary)
         )
+
+        //@JvmStatic - Specifies that an additional static method needs to be generated from this element if it's a function.
+        // If this element is a property, additional static getter/setter methods should be generated
+        @JvmStatic
+        fun fromTeamId(teamId: String?) = allTeams.firstOrNull { uiTeam -> uiTeam.teamId == teamId }
     }
 }

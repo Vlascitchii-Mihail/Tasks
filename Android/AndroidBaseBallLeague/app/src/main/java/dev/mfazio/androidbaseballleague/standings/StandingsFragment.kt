@@ -14,7 +14,7 @@ import dev.mfazio.androidbaseballleague.R
  */
 class StandingsFragment: Fragment() {
 
-///ppd
+    private val standingsViewModel by activityViewModels<StandingsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,11 +23,26 @@ class StandingsFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_standings, container, false)
 
+        val standingsAdapter = StandingsAdapter()
+
+        //smart cast
         if (view is RecyclerView) {
-            //ppp
+            view.adapter = standingsAdapter
         }
 
-        //ppppppp
+        //LiveData.observe - listener's registration
+//         viewLifecycleOwner - Get a LifecycleOwner that represents the Fragment's View lifecycle.
+//         fragment's view lifecycle. Снимает слушателя после уничтожения фрагмента
+
+//         Observer - reaction to a new data (lambda) Adds the given observer to the observers list within
+//         the lifespan (срока жизни) of the given owner. The events are dispatched on the main thread.
+
+        //standings - list with UITeams for Recycler view
+        standingsViewModel.standings.observe(viewLifecycleOwner) { standings ->
+
+            //send the list with UITeams to Adapter
+            standingsAdapter.addHeadersAndBuildStandings(standings)
+        }
 
         return view
     }

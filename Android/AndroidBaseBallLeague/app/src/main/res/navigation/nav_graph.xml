@@ -8,7 +8,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/teamsFragment">
+    app:startDestination="@id/standingsFragment">
+
+    <fragment
+        android:id="@+id/standingsFragment"
+        android:name="dev.mfazio.androidbaseballleague.standings.StandingsFragment"
+        android:label="@string/standings"/>
 
     <!--    adding the fragment and his ID in navigation
 android:name - name of the package and the class

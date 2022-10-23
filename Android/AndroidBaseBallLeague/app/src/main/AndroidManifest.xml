@@ -24,6 +24,9 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+<!--            add deepLink support-->
+            <nav-graph android:value="@navigation/nav_graph"/>
         </activity>
     </application>
 

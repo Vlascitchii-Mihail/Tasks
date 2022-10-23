@@ -10,10 +10,53 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/standingsFragment">
 
+
     <fragment
         android:id="@+id/standingsFragment"
         android:name="dev.mfazio.androidbaseballleague.standings.StandingsFragment"
-        android:label="@string/standings"/>
+        android:label="@string/standings">
+    </fragment>
+
+
+    <!--   <action/> - go to another fragment, we can refers to <action/> from any place-->
+    <action
+        android:id="@+id/actionGoToTeam"
+        app:destination="@id/singleTeamFragment">
+
+        <!--        <argument/> - send the data to another fragment-->
+        <argument
+            android:name="teamId"
+            app:argType="string"/>
+
+        <argument
+            android:name="teamName"
+            app:argType="string"/>
+
+    </action>
+
+
+<!--    android:label="{teamName}" - data will be displayed in the toolbar when the screen is shown-->
+    <fragment
+        android:id="@+id/singleTeamFragment"
+        android:name="dev.mfazio.androidbaseballleague.team.SingleTeamFragment"
+        android:label="{teamName}"
+        tools:layout="@layout/fragment_single_team">
+
+<!--    allow SingleTeamFragment to receive args from StandingsFragment-->
+        <argument
+            android:name="teamId"
+            app:argType="string"/>
+
+        <argument
+            android:name="teamName"
+            app:argType="string"/>
+
+<!--    click to link from everywhere to enter in the some fragment-->
+        <deepLink
+            app:uri="https://link.mfazio.dev/teams/{teamId}?teamName={teamName}"/>
+
+    </fragment>
+
 
     <!--    adding the fragment and his ID in navigation
 android:name - name of the package and the class

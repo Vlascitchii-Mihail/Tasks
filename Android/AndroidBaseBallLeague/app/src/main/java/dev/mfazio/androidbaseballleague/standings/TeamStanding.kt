@@ -1,11 +1,14 @@
 package dev.mfazio.androidbaseballleague.standings
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import dev.mfazio.androidbaseballleague.team.Division
 import dev.mfazio.androidbaseballleague.team.Team
 
 /**
  * data about teams' statistics
  */
+@Entity(tableName = "standings")
 data class TeamStanding(
     val teamId: String,
     val division: Division,
@@ -17,6 +20,8 @@ data class TeamStanding(
     val divisionGamesBack: Double,
     val leagueGamesBack: Double
 ) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
     companion object {
         val mockTeamStandings = listOf(
             TeamStanding(Team.Appleton.id, Team.Appleton.division, 80, 75, 6, 1, WinLoss.Loss, 15.5, 15.5),

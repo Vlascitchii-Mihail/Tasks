@@ -5,6 +5,8 @@ plugins {
 
     //binding
     id 'kotlin-kapt'
+
+    //allows to send typed values between classes
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -67,6 +69,12 @@ dependencies {
     //recycler view
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+    //add Room
+    implementation "androidx.room:room-ktx:2.4.3"
+    implementation "androidx.room:room-runtime:2.4.3"
+
+    //allows to use Room's requests
+    kapt "androidx.room:room-compiler:2.4.3"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

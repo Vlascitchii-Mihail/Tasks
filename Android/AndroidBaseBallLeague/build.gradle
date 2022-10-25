@@ -7,3 +7,13 @@ plugins {
     //allows to send typed values between classes
     id 'androidx.navigation.safeargs' version '2.5.2' apply false
 }
+
+
+
+
+
+
+
+
+
+

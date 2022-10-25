@@ -16,7 +16,7 @@ abstract class BaseBallDao {
     abstract suspend fun updateStandings(standings: List<TeamStanding>)
 
     @Query("SELECT * FROM standings")
-    abstract suspend fun getStandings(): LiveData<List<TeamStanding>>
+    abstract fun getStandings(): LiveData<List<TeamStanding>>
 
     @Query("SELECT * FROM standings")
     abstract suspend fun getCurrentStandings(): List<TeamStanding>

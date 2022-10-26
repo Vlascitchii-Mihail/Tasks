@@ -54,7 +54,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
 
     //theme design
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
@@ -77,10 +77,13 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.3"
 
     //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0."
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+//    "com.squareup.retrofit2.9.0:retrofit:2."
 
     //M.Fazio api client
     implementation "dev.mfazio:abl-api-client:1.1.1"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

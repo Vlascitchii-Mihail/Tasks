@@ -18,4 +18,7 @@
     <string name="streak_abbr">STRK</string>
     <string name="view_roster">View Roster</string>
     <string name="in_abl">in ABL</string>
+    <string name="network_exception_message">Network exception</string>
+    <string name="request_exception_message">Request exception</string>
+    <string name="general_exception_message">General exception</string>
 </resources>

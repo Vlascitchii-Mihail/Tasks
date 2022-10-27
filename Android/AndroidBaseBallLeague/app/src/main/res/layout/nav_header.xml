@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ ! Excerpted from "Kotlin and Android Development featuring Jetpack",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material,
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose.
+ ! Visit https://pragprog.com/titles/mfjetpack for more book information.
+-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,8 +15,7 @@
     android:padding="16dp"
     android:background="@color/androidGreen">
 
-
-<!--    android:scaleType="fitStart" - Controls how the image should be resized or moved to match the
+    <!--    android:scaleType="fitStart" - Controls how the image should be resized or moved to match the
 size of this ImageView. Гарантирует что изображение правильно помещается внутри своего контейнера -->
     <ImageView
         android:layout_width="wrap_content"
@@ -20,6 +27,6 @@ size of this ImageView. Гарантирует что изображение п�
         android:src="@drawable/ic_abl_logo_with_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

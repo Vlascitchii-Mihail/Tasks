@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ ! Excerpted from "Kotlin and Android Development featuring Jetpack",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material,
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose.
+ ! Visit https://pragprog.com/titles/mfjetpack for more book information.
+-->
 
 <!--    fragments' navigation
-
         app:startDestination - start point of the app-->
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/standingsFragment">
-
-
-    <fragment
-        android:id="@+id/standingsFragment"
-        android:name="dev.mfazio.androidbaseballleague.standings.StandingsFragment"
-        android:label="@string/standings">
-    </fragment>
 
 
     <!--   <action/> - (global action) go to another fragment, we can refers to <action/> from any place-->
@@ -26,47 +25,45 @@
         <!--        <argument/> - send the data to another fragment-->
         <argument
             android:name="teamId"
-            app:argType="string"/>
-
+            app:argType="string" />
         <argument
             android:name="teamName"
-            app:argType="string"/>
-
+            app:argType="string" />
     </action>
 
 
-<!--    android:label="{teamName}" - data will be displayed in the toolbar when the screen is shown
+    <fragment
+        android:id="@+id/scoreboardFragment"
+        android:name="dev.mfazio.abl.scoreboard.ScoreboardFragment"
+        android:label="@string/scoreboard" />
 
+    <fragment
+        android:id="@+id/standingsFragment"
+        android:name="dev.mfazio.abl.standings.StandingsFragment"
+        android:label="@string/standings" />
+
+    <fragment
+        android:id="@+id/teamsFragment"
+        android:name="dev.mfazio.abl.teams.TeamsFragment"
+        android:label="@string/teams" />
+
+    <!--    android:label="{teamName}" - data will be displayed in the toolbar when the screen is shown
 android:label="{teamName}" - using the args data-->
     <fragment
         android:id="@+id/singleTeamFragment"
-        android:name="dev.mfazio.androidbaseballleague.team.SingleTeamFragment"
+        android:name="dev.mfazio.abl.teams.SingleTeamFragment"
         android:label="{teamName}"
         tools:layout="@layout/fragment_single_team">
 
-<!--    allow SingleTeamFragment to receive args from StandingsFragment-->
+        <!--    allow SingleTeamFragment to receive args from StandingsFragment-->
         <argument
             android:name="teamId"
-            app:argType="string"/>
-
+            app:argType="string" />
         <argument
             android:name="teamName"
-            app:argType="string"/>
+            app:argType="string" />
 
-<!--    click to link from everywhere to enter in the some fragment-->
-        <deepLink
-            app:uri="https://link.mfazio.dev/teams/{teamId}?teamName={teamName}"/>
-
+        <!--    click to link from everywhere to enter in the some fragment-->
+        <deepLink app:uri="https://link.mfazio.dev/teams/{teamId}?teamName={teamName}" />
     </fragment>
-
-
-    <!--    adding the fragment and his ID in navigation
-android:name - name of the package and the class
-android:label - XML files
- android:id - ID from the menu navigation.xml-->
-    <fragment
-        android:id="@+id/teamsFragment"
-        android:name="dev.mfazio.androidbaseballleague.team.TeamsFragment"
-        android:label="@string/teams"/>
-
 </navigation>

@@ -1,19 +1,2 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-
-        //add ABL client
-        maven { url 'https://jitpack.io' }
-    }
-}
-rootProject.name = "Android BaseBall League"
 include ':app'
+rootProject.name = "Android Baseball League"

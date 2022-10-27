@@ -16,7 +16,7 @@
 
         <variable
             name="vm"
-            type="dev.mfazio.androidbaseballleague.team.SingleTeamViewModel" />
+            type="dev.mfazio.abl.teams.SingleTeamViewModel" />
 
         <variable
             name="viewRosterButtonClickListener"

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+<!--
+ ! Excerpted from "Kotlin and Android Development featuring Jetpack",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material,
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose.
+ ! Visit https://pragprog.com/titles/mfjetpack for more book information.
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="divisionName"
-            type="String"/>
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="EAST"/>
+            tools:text="EAST" />
 
         <TextView
             android:id="@+id/headerWins"
@@ -34,9 +42,8 @@
             android:gravity="center"
             android:text="@string/wins_w"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/headerLosses"
-            tools:text="102"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/headerLosses"
@@ -45,9 +52,8 @@
             android:gravity="center"
             android:text="@string/losses_l"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/headerWinPercentage"
-            tools:text="54"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/headerWinPercentage"
@@ -57,8 +63,7 @@
             android:text="@string/percentage_abbr"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/headerGamesBack"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text=".642" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/headerGamesBack"
@@ -68,8 +73,7 @@
             android:text="@string/games_back_abbr"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/headerLastTen"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="4.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/headerLastTen"
@@ -79,8 +83,7 @@
             android:text="@string/last_ten_abbr"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/headerStreak"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="6-4" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/headerStreak"
@@ -90,9 +93,7 @@
             android:text="@string/streak_abbr"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="W3" />
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

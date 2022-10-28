@@ -1,6 +1,7 @@
 package dev.mfazio.abl.util
 
 import dev.mfazio.abl.api.models.*
+import dev.mfazio.abl.players.*
 import dev.mfazio.abl.scoreboard.ScheduledGame
 import dev.mfazio.abl.scoreboard.ScheduledGameStatus
 import dev.mfazio.abl.scoreboard.ScoreboardPlayerInfo
@@ -92,4 +93,114 @@ fun ScheduledGameBatterApiModel.convertCurrentBatterToScoreboardPlayerInfo() =
     ScoreboardPlayerInfo(
         this.playerName,
         "${this.hitsToday}-${this.atBatsToday}, ${this.battingAverage}"
+    )
+
+fun PlayerApiModel.convertToPlayer() = Player(
+    this.playerId,
+    this.teamId,
+    this.firstName,
+    this.lastName,
+    this.number,
+    this.bats.toHand(),
+    this.throws.toHand(),
+    this.position.toPosition(),
+    this.boxScoreLastName ?: this.lastName
+)
+
+fun List<PlayerApiModel>.convertToPlayers() = this.map(PlayerApiModel::convertToPlayer)
+
+fun HandApiModel.toHand() = when (this) {
+    HandApiModel.Left -> Hand.Left
+    HandApiModel.Right -> Hand.Right
+    else -> Hand.Unknown
+}
+
+fun PositionApiModel.toPosition() =
+    Position.values().firstOrNull { it.shortName == this.shortName } ?: Position.Unknown
+
+fun List<BatterBoxScoreItemApiModel>.convertToBattersAndStats() =
+    this.associate { apiModel ->
+        apiModel.convertToBatterAndStats()
+    }.let { statsMap ->
+        Pair(statsMap.keys.toList(), statsMap.values.toList())
+    }
+
+fun BatterBoxScoreItemApiModel.convertToBatterAndStats() =
+    Player(
+        this.playerId,
+        this.teamId,
+        this.firstName,
+        this.lastName,
+        this.number,
+        this.bats.toHand(),
+        this.throws.toHand(),
+        this.position.toPosition(),
+        this.boxScoreLastName
+    ) to PlayerStats(
+        this.playerId,
+        batterStats = BatterStats(
+            this.games,
+            this.plateAppearances,
+            this.atBats,
+            this.runs,
+            this.hits,
+            this.doubles,
+            this.triples,
+            this.homeRuns,
+            this.rbi,
+            this.strikeouts,
+            this.baseOnBalls,
+            this.hitByPitch,
+            this.stolenBases,
+            this.caughtStealing,
+            this.gidp,
+            this.sacrificeHits,
+            this.sacrificeFlies,
+            this.errors,
+            this.passedBalls
+        )
+    )
+
+fun List<PitcherBoxScoreItemApiModel>.convertToPitchersAndStats() =
+    this.associate { apiModel ->
+        apiModel.convertToPitcherAndStats()
+    }.let { statsMap ->
+        Pair(statsMap.keys.toList(), statsMap.values.toList())
+    }
+
+fun PitcherBoxScoreItemApiModel.convertToPitcherAndStats() =
+    Player(
+        this.playerId,
+        this.teamId,
+        this.firstName,
+        this.lastName,
+        this.number,
+        this.bats.toHand(),
+        this.throws.toHand(),
+        this.position.toPosition(),
+        this.boxScoreLastName
+    ) to PlayerStats(
+        this.playerId,
+        pitcherStats = PitcherStats(
+            this.games,
+            this.gamesStarted,
+            this.outs,
+            this.hits,
+            this.doubles,
+            this.triples,
+            this.homeRuns,
+            this.runs,
+            this.earnedRuns,
+            this.baseOnBalls,
+            this.hitByPitches,
+            this.strikeouts,
+            this.errors,
+            this.wildPitches,
+            this.battersFaced,
+            this.wins,
+            this.losses,
+            this.saves,
+            this.blownSaves,
+            this.holds
+        )
     )

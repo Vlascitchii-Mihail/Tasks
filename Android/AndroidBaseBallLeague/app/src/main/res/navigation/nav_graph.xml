@@ -7,22 +7,14 @@
  ! We make no guarantees that this code is fit for any purpose.
  ! Visit https://pragprog.com/titles/mfjetpack for more book information.
 -->
-
-<!--    fragments' navigation
-        app:startDestination - start point of the app-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/standingsFragment">
-
-
-    <!--   <action/> - (global action) go to another fragment, we can refers to <action/> from any place-->
+    app:startDestination="@id/leadersFragment">
     <action
         android:id="@+id/actionGoToTeam"
         app:destination="@id/singleTeamFragment">
-
-        <!--        <argument/> - send the data to another fragment-->
         <argument
             android:name="teamId"
             app:argType="string" />
@@ -30,40 +22,64 @@
             android:name="teamName"
             app:argType="string" />
     </action>
-
-
+    <action
+        android:id="@+id/actionGoToPlayer"
+        app:destination="@id/singlePlayerFragment">
+        <argument
+            android:name="playerId"
+            app:argType="string" />
+        <argument
+            android:name="playerName"
+            app:argType="string" />
+    </action>
+    <action
+        android:id="@+id/actionGoToTeamRoster"
+        app:destination="@id/playersFragment">
+        <argument
+            android:name="teamId"
+            app:argType="string" />
+    </action>
+    <fragment
+        android:id="@+id/leadersFragment"
+        android:name="dev.mfazio.abl.leaders.LeadersFragment"
+        android:label="@string/leaders"
+        tools:layout="@layout/fragment_leaders" />
+    <fragment
+        android:id="@+id/singlePlayerFragment"
+        android:name="dev.mfazio.abl.players.SinglePlayerFragment"
+        android:label="{playerName}"
+        tools:layout="@layout/fragment_single_player">
+        <argument
+            android:name="playerId"
+            app:argType="string" />
+        <argument
+            android:name="playerName"
+            app:argType="string" />
+        <deepLink app:uri="https://link.mfazio.dev/players/{playerId}?playerName={playerName}" />
+    </fragment>
     <fragment
         android:id="@+id/scoreboardFragment"
         android:name="dev.mfazio.abl.scoreboard.ScoreboardFragment"
         android:label="@string/scoreboard" />
-
     <fragment
         android:id="@+id/standingsFragment"
         android:name="dev.mfazio.abl.standings.StandingsFragment"
         android:label="@string/standings" />
-
     <fragment
         android:id="@+id/teamsFragment"
         android:name="dev.mfazio.abl.teams.TeamsFragment"
         android:label="@string/teams" />
-
-    <!--    android:label="{teamName}" - data will be displayed in the toolbar when the screen is shown
-android:label="{teamName}" - using the args data-->
     <fragment
         android:id="@+id/singleTeamFragment"
         android:name="dev.mfazio.abl.teams.SingleTeamFragment"
         android:label="{teamName}"
         tools:layout="@layout/fragment_single_team">
-
-        <!--    allow SingleTeamFragment to receive args from StandingsFragment-->
         <argument
             android:name="teamId"
             app:argType="string" />
         <argument
             android:name="teamName"
             app:argType="string" />
-
-        <!--    click to link from everywhere to enter in the some fragment-->
         <deepLink app:uri="https://link.mfazio.dev/teams/{teamId}?teamName={teamName}" />
     </fragment>
 </navigation>

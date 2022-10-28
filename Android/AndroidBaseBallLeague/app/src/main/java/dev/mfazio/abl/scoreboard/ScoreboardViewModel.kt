@@ -25,7 +25,7 @@ class ScoreboardViewModel(application: Application) : AndroidViewModel(applicati
     init {
         repo = BaseballDatabase
             .getDatabase(application, viewModelScope)
-            .baseballDao()
+//            .baseballDao()
             .let { dao ->
                 BaseballRepository.getInstance(dao)
             }
@@ -56,6 +56,9 @@ class ScoreboardViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
+    /**
+     * update ScheduledGame if game exists or add new game
+     */
     private fun refreshScores(date: LocalDate) {
         viewModelScope.launch {
             repo.updateGamesForDate(date).getErrorMessage(getApplication())?.let { message ->
@@ -63,4 +66,5 @@ class ScoreboardViewModel(application: Application) : AndroidViewModel(applicati
             }
         }
     }
+
 }

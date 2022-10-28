@@ -22,7 +22,7 @@ class StandingsViewModel(application: Application) :
         //create a database's object and repository's object
         repo = BaseballDatabase
             .getDatabase(application, viewModelScope)
-            .baseballDao()
+//            .baseballDao()
             .let { dao ->
                 BaseballRepository.getInstance(dao)
             }

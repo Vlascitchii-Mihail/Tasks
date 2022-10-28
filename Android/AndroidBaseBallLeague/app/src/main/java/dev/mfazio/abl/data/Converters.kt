@@ -1,6 +1,8 @@
 package dev.mfazio.abl.data
 
 import androidx.room.TypeConverter
+import dev.mfazio.abl.players.Hand
+import dev.mfazio.abl.players.Position
 import dev.mfazio.abl.scoreboard.OccupiedBases
 import dev.mfazio.abl.scoreboard.ScheduledGameStatus
 import dev.mfazio.abl.standings.WinLoss
@@ -8,7 +10,7 @@ import dev.mfazio.abl.teams.Division
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class BaseballConverters {
+class Converters {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
     @TypeConverter
@@ -54,4 +56,28 @@ class BaseballConverters {
 
     @TypeConverter
     fun toOccupiedBases(basesStringList: String?) = OccupiedBases.fromStringList(basesStringList)
+
+    @TypeConverter
+    fun fromHand(hand: Hand?) =
+        hand?.ordinal ?: Hand.Right.ordinal
+
+    @TypeConverter
+    fun toHand(handOrdinal: Int?) =
+        if (handOrdinal != null) {
+            Hand.values()[handOrdinal]
+        } else {
+            Hand.Right
+        }
+
+    @TypeConverter
+    fun fromPosition(position: Position?) =
+        position?.ordinal ?: Position.Unknown.ordinal
+
+    @TypeConverter
+    fun toPosition(positionOrdinal: Int?) =
+        if (positionOrdinal != null) {
+            Position.values()[positionOrdinal]
+        } else {
+            Position.Unknown
+        }
 }

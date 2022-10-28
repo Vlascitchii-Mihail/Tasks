@@ -4,27 +4,20 @@ import androidx.lifecycle.LiveData
 import dev.mfazio.abl.api.services.getDefaultABLService
 import dev.mfazio.abl.scoreboard.ScheduledGame
 import dev.mfazio.abl.standings.TeamStanding
-import dev.mfazio.abl.util.convertToScheduledGames
-import dev.mfazio.abl.util.convertToTeamStandings
-import dev.mfazio.abl.util.toGameDateString
+import dev.mfazio.abl.util.*
 import java.io.IOException
 import java.time.LocalDate
 
-/**
- * create a new Repository's object
- */
-class BaseballRepository(private val baseballDao: BaseballDao) {
+class BaseballRepository(
+    private val baseballDatabase: BaseballDatabase,
+) {
+    private val baseballDao = baseballDatabase.baseballDao()
 
     fun getStandings(): LiveData<List<TeamStanding>> =
         baseballDao.getStandings()
 
-    /**
-     * get data from ABL API client
-     */
     suspend fun updateStandings(): ResultStatus {
         val standingsResult = safeApiRequest {
-
-            //getStandings() - get data from ABL API client
             apiService.getStandings()
         }
 
@@ -61,9 +54,79 @@ class BaseballRepository(private val baseballDao: BaseballDao) {
         }
     }
 
-    /**
-     * variants of the exceptions
-     */
+    fun getPlayerWithStats(playerId: String) = baseballDao.getPlayerWithStats(playerId)
+
+    fun getBattersWithStats() = baseballDao.getBattersWithStats()
+
+    fun getPitchersWithStats() = baseballDao.getPitchersWithStats()
+
+    suspend fun updatePlayer(playerId: String): ResultStatus {
+        val playerResult = safeApiRequest {
+            apiService.getSinglePlayer(playerId)
+        }
+
+        return if (playerResult.success) {
+
+            val batterPair = playerResult.result?.batting?.convertToBatterAndStats()
+            val pitcherPair = playerResult.result?.pitching?.convertToPitcherAndStats()
+
+            val player = batterPair?.first ?: pitcherPair?.first
+            val playerStats = batterPair?.second ?: pitcherPair?.second
+
+            if (player != null) {
+                baseballDao.insertOrUpdatePlayer(player)
+            }
+
+            if (playerStats != null) {
+                baseballDao.insertOrUpdatePlayerStats(playerStats)
+            }
+
+            ResultStatus.Success
+        } else {
+            playerResult.status
+        }
+    }
+
+    suspend fun updateBattingLeaders(): ResultStatus {
+        val leadersResult = safeApiRequest {
+            apiService.getBattingLeaders()
+        }
+
+        return if (
+            leadersResult.success &&
+            leadersResult.result?.any() == true
+        ) {
+            val (players, playerStats) = leadersResult.result.convertToBattersAndStats()
+
+            baseballDao.insertOrUpdatePlayers(players)
+            baseballDao.insertOrUpdateStats(playerStats)
+
+            ResultStatus.Success
+        } else {
+            leadersResult.status
+        }
+    }
+
+    suspend fun updatePitchingLeaders(): ResultStatus {
+        val leadersResult = safeApiRequest {
+            apiService.getPitchingLeaders()
+        }
+
+        return if (
+            leadersResult.success &&
+            leadersResult.result?.any() == true
+        ) {
+            val (players, playerStats) = leadersResult.result.convertToPitchersAndStats()
+
+            baseballDao.insertOrUpdatePlayers(players)
+            baseballDao.insertOrUpdateStats(playerStats)
+
+            ResultStatus.Success
+        } else {
+            leadersResult.status
+        }
+    }
+
     enum class ResultStatus {
         Unknown,
         Success,
@@ -72,10 +135,6 @@ class BaseballRepository(private val baseballDao: BaseballDao) {
         GeneralException
     }
 
-
-    /**
-     * Result of the updating the StandingsFragment
-     */
     inner class ApiResult<T>(
         val result: T? = null,
         val status: ResultStatus = ResultStatus.Unknown
@@ -83,11 +142,6 @@ class BaseballRepository(private val baseballDao: BaseballDao) {
         val success = status == ResultStatus.Success
     }
 
-
-    /**
-     * catch the exceptions and return the description of the exception
-     * @param apiFunction function which can return an exception
-     */
     private suspend fun <T> safeApiRequest(
         apiFunction: suspend () -> T
     ): ApiResult<T> =
@@ -102,28 +156,15 @@ class BaseballRepository(private val baseballDao: BaseballDao) {
             ApiResult(status = ResultStatus.GeneralException)
         }
 
-
-    /**
-     * @property instance refers to the repository
-     */
     companion object {
-
-        /**
-         * reference to ABL API client
-         */
         private val apiService = getDefaultABLService()
 
-        //Помечает вспомогательное поле JVM аннотированного свойства как изменчивое,
-        // что означает, что записи в это поле немедленно становятся видимыми для других потоков.
         @Volatile
         private var instance: BaseballRepository? = null
 
-        /**
-         * create a new Repository's object
-         */
-        fun getInstance(baseballDao: BaseballDao) =
+        fun getInstance(baseballDatabase: BaseballDatabase) =
             this.instance ?: synchronized(this) {
-                instance ?: BaseballRepository(baseballDao).also {
+                instance ?: BaseballRepository(baseballDatabase).also {
                     instance = it
                 }
             }

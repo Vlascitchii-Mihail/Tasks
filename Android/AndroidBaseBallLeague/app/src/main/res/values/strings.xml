@@ -34,4 +34,7 @@
     <string name="scoreboard_third_base">Scoreboard Third Base</string>
     <string name="scoreboard_left_arrow">Scoreboard Left Arrow</string>
     <string name="scoreboard_right_arrow">Scoreboard Right Arrow</string>
+    <string name="player_team_logo">Team Logo for Player</string>
+    <string name="single_player_team_logo">Team Logo for a Player</string>
+    <string name="search_players">Search Players…</string>
 </resources>

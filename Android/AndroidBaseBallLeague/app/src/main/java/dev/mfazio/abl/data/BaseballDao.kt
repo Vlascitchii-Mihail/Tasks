@@ -1,11 +1,9 @@
 package dev.mfazio.abl.data
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.*
-import dev.mfazio.abl.players.Player
-import dev.mfazio.abl.players.PlayerStats
-import dev.mfazio.abl.players.PlayerWithStats
-import dev.mfazio.abl.players.Position
+import dev.mfazio.abl.players.*
 import dev.mfazio.abl.scoreboard.ScheduledGame
 import dev.mfazio.abl.standings.TeamStanding
 
@@ -122,4 +120,23 @@ abstract class BaseballDao {
             updatePlayerStats(playerStats.apply { id = dbPlayerStats.id })
         } ?: insertPlayerStats(playerStats)
     }
+
+    @Query(
+        """
+            SELECT * FROM player_list_items WHERE (:teamId IS NULL OR teamId = :teamId)
+            AND (:nameQuery IS NULL OR playerName LIKE :nameQuery)
+            ORDERED BY playerId
+        """
+    )
+    abstract fun getPlayerListItems(
+        teamId: String? = null,
+        nameQuery: String? = null,
+    ): PagingSource<Int, PlayerListItem>
+
+    //What to do if a conflict happens.
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertPlayerListItem(playerListItem: List<PlayerListItem>)
+
+    @Query("DELETE FROM player_list_items")
+    abstract suspend fun deleteAllPlayersListItem()
 }

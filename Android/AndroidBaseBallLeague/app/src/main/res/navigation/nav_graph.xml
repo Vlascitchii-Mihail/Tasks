@@ -12,6 +12,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/leadersFragment">
+
     <action
         android:id="@+id/actionGoToTeam"
         app:destination="@id/singleTeamFragment">
@@ -22,6 +23,7 @@
             android:name="teamName"
             app:argType="string" />
     </action>
+
     <action
         android:id="@+id/actionGoToPlayer"
         app:destination="@id/singlePlayerFragment">
@@ -32,6 +34,18 @@
             android:name="playerName"
             app:argType="string" />
     </action>
+
+    <fragment
+        android:id="@+id/playersFragment"
+        android:name="dev.mfazio.abl.players.PlayersFragment"
+        android:label="@string/players">
+        <argument
+            android:name="teamId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nulable="true"/>
+    </fragment>
+
     <action
         android:id="@+id/actionGoToTeamRoster"
         app:destination="@id/playersFragment">
@@ -39,11 +53,13 @@
             android:name="teamId"
             app:argType="string" />
     </action>
+
     <fragment
         android:id="@+id/leadersFragment"
         android:name="dev.mfazio.abl.leaders.LeadersFragment"
         android:label="@string/leaders"
         tools:layout="@layout/fragment_leaders" />
+
     <fragment
         android:id="@+id/singlePlayerFragment"
         android:name="dev.mfazio.abl.players.SinglePlayerFragment"
@@ -57,18 +73,23 @@
             app:argType="string" />
         <deepLink app:uri="https://link.mfazio.dev/players/{playerId}?playerName={playerName}" />
     </fragment>
+
+
     <fragment
         android:id="@+id/scoreboardFragment"
         android:name="dev.mfazio.abl.scoreboard.ScoreboardFragment"
         android:label="@string/scoreboard" />
+
     <fragment
         android:id="@+id/standingsFragment"
         android:name="dev.mfazio.abl.standings.StandingsFragment"
         android:label="@string/standings" />
+
     <fragment
         android:id="@+id/teamsFragment"
         android:name="dev.mfazio.abl.teams.TeamsFragment"
         android:label="@string/teams" />
+
     <fragment
         android:id="@+id/singleTeamFragment"
         android:name="dev.mfazio.abl.teams.SingleTeamFragment"
@@ -82,4 +103,5 @@
             app:argType="string" />
         <deepLink app:uri="https://link.mfazio.dev/teams/{teamId}?teamName={teamName}" />
     </fragment>
+
 </navigation>

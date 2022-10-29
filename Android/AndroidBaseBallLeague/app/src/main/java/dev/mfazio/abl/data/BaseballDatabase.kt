@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import dev.mfazio.abl.players.Player
+import dev.mfazio.abl.players.PlayerKeys
+import dev.mfazio.abl.players.PlayerListItem
 import dev.mfazio.abl.players.PlayerStats
 import dev.mfazio.abl.scoreboard.ScheduledGame
 import dev.mfazio.abl.standings.TeamStanding
@@ -15,7 +17,9 @@ import kotlinx.coroutines.launch
         Player::class,
         PlayerStats::class,
         ScheduledGame::class,
-        TeamStanding::class
+        TeamStanding::class,
+        PlayerListItem::class,
+        PlayerKeys::class,
     ],
     exportSchema = false,
     version = 1
@@ -23,6 +27,7 @@ import kotlinx.coroutines.launch
 @TypeConverters(Converters::class)
 abstract class BaseballDatabase : RoomDatabase() {
     abstract fun baseballDao(): BaseballDao
+    abstract fun playerKeysDao(): PlayersKeysDao
 
     companion object {
         @Volatile

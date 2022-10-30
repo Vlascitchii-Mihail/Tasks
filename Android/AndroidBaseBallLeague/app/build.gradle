@@ -65,7 +65,7 @@ dependencies {
     //M.Fazio api client
     implementation "dev.mfazio:abl-api-client:$abl_client_version"
 
-    //Display Views or Fragments in a swipeable format.
+    //Display Views or Fragments in a swipable format.
     implementation"androidx.viewpager2:viewpager2:$view_pager_version"
 
     //add paging

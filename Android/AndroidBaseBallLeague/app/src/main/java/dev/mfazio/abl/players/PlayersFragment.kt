@@ -13,6 +13,7 @@ import dev.mfazio.abl.databinding.FragmentPlayersBinding
 class PlayersFragment: Fragment() {
     private val playerListArgs: PlayersFragmentArgs by navArgs()
 
+    //with paging
     private lateinit var playersAdapter: PlayersAdapter
 
     override fun onCreateView(

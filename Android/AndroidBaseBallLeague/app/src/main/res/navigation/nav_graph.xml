@@ -35,6 +35,7 @@
             app:argType="string" />
     </action>
 
+
     <fragment
         android:id="@+id/playersFragment"
         android:name="dev.mfazio.abl.players.PlayersFragment"
@@ -45,6 +46,7 @@
             app:argType="string"
             app:nulable="true"/>
     </fragment>
+
 
     <action
         android:id="@+id/actionGoToTeamRoster"

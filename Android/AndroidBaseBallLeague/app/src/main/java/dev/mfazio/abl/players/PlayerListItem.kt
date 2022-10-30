@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * the view for each string in the list
+ * the view for each string in the RecyclerView
  */
 @Entity(tableName = "player_list_items")
 data class PlayerListItem(

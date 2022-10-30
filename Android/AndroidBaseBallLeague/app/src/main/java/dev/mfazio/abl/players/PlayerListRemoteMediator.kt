@@ -4,8 +4,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
 import dev.mfazio.abl.api.services.AndroidBaseballLeagueService
 import dev.mfazio.abl.data.BaseballDatabase
+import dev.mfazio.abl.util.convertToPlayers
 import java.io.InvalidObjectException
 
 /**
@@ -79,7 +81,7 @@ class PlayerListRemoteMediator(
     }
 
     /**
-     * where to start loading new data
+     * return current key
      */
     private suspend fun loadKeysForClosestPlayer(
         state: PagingState<Int, PlayerListItem>
@@ -90,6 +92,53 @@ class PlayerListRemoteMediator(
             baseballDatabase.playerKeysDao().getPlayerKeysByPlayerId(playerId)
         }
     }
+
+    private suspend fun loadAndSaveApiData(
+        page: Int,
+        state: PagingState<Int, PlayerListItem>,
+        isRefresh: Boolean
+    ) : MediatorResult =
+        try {
+            val apiResponse = apiService.getPlayers(page, state.config.pageSize, nameQuery, teamId)
+
+            val players = apiResponse.convertToPlayers()
+            val endOfPaginationReached = players.isEmpty()
+
+            //Calls the specified suspending block in a database transaction. The transaction will
+            // be marked as successful unless an exception is thrown in the suspending block
+            // or the coroutine is cancelled
+            baseballDatabase.withTransaction {
+                if(isRefresh) {
+                    baseballDatabase.playerKeysDao().deleteAllPlayerKeys()
+                    baseballDatabase.baseballDao().deleteAllPlayersListItem()
+
+                    val previousKey = if (page == startingPageIndex) null else page -1
+                    val nextKey = if (endOfPaginationReached) null else page + 1
+                    val keys = players.map { player ->
+                        PlayerKeys(player.playerId, previousKey, nextKey)
+                    }
+
+                    baseballDatabase.playerKeysDao().insertKeys(keys)
+                    baseballDatabase.baseballDao().insertOrUpdatePlayers(players)
+                    baseballDatabase.baseballDao().insertPlayerListItem(
+                        players.map { player ->
+                            PlayerListItem(
+                                player.playerId,
+                                player.fullName,
+                                player.teamId,
+                                player.position
+                            )
+                        }
+                    )
+                }
+            }
+
+
+            MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+        } catch (ex: Exception) {
+            MediatorResult.Error(ex)
+        }
+
 
     companion object {
         private const val startingPageIndex = 0

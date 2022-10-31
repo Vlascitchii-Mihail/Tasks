@@ -7,7 +7,7 @@ import androidx.room.Query
 import dev.mfazio.abl.players.PlayerKeys
 
 @Dao
-interface PlayersKeysDao {
+interface PlayerKeysDao {
 
     @Query("SELECT * FROM player_keys WHERE playerId = :playerId")
     suspend fun getPlayerKeysByPlayerId(playerId: String): PlayerKeys?
@@ -17,4 +17,5 @@ interface PlayersKeysDao {
 
     @Query("DELETE FROM player_keys")
     suspend fun deleteAllPlayerKeys()
+
 }

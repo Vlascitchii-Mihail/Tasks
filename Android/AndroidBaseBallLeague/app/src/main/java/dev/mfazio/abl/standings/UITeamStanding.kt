@@ -3,9 +3,6 @@ package dev.mfazio.abl.standings
 import dev.mfazio.abl.teams.UITeam
 import java.text.DecimalFormat
 
-/**
- * Information about the teams for the Recycler View's item
- */
 data class UITeamStanding(
     val teamStanding: TeamStanding,
     val teamName: String,
@@ -22,8 +19,6 @@ data class UITeamStanding(
     val teamId = teamStanding.teamId
     val wins = teamStanding.wins.toString()
     val losses = teamStanding.losses.toString()
-
-    //formation the Double number
     val winPercentage = winPercentageFormat.format(winPercentageNumber)
     val winLossText = "${teamStanding.wins} - ${teamStanding.losses}"
     val gamesBackText = if (gamesBack <= 0) "-" else gamesBack.toString()
@@ -31,8 +26,6 @@ data class UITeamStanding(
     val streakText = "${teamStanding.streakType.shortName}${teamStanding.streakCount}"
 
     companion object {
-
-        //Creates a DecimalFormat based on the given pattern, using symbols for the default locale.
         private val winPercentageFormat = DecimalFormat("#.000")
 
         fun fromTeamIdAndStandings(teamId: String?, teamStandings: List<TeamStanding>) =

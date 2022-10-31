@@ -7,10 +7,6 @@
  ! We make no guarantees that this code is fit for any purpose.
  ! Visit https://pragprog.com/titles/mfjetpack for more book information.
 -->
-
-<!--    DrawerLayout выступает в качестве контейнера верхнего уровня для содержимого окна,
-что позволяет вытягивать интерактивные представления «ящиков» из одного или обоих
-вертикальных краев окна.-->
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,14 +29,6 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-        <!-- creating a container for fragments
-
-     android:name - A unique name for the given item
-
-     app:defaultNavHost="true"  -  telling that FragmentContainerView
-is default fragments' host
-
-     app:navGraph - adding our nav_graph XML file-->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/containerFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -50,15 +38,6 @@ is default fragments' host
             app:navGraph="@navigation/nav_graph" />
     </LinearLayout>
 
-    <!--    android:fitsSystemWindows="true" - Логический внутренний атрибут для настройки макета
-представления на основе системных окон, таких как строка состояния. Если true, корректирует
-заполнение этого представления, чтобы оставить место для системных окон. Вступит в силу только
-в том случае, если это представление находится в невстроенном действии. NavigationView переместится
-вниз для правильного отображения
-
-app:headerLayout="@layout/nav_header" - reference  Layout resource to inflate as the header (заголовок)
-
-app:menu="@menu/navigation" - reference  The menu resource to inflate and populate items from.-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

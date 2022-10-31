@@ -8,8 +8,6 @@
  ! Visit https://pragprog.com/titles/mfjetpack for more book information.
 -->
 
-
-<!--    tools:listitem="@layout/teams_grid_item" - example of the item(element) for grid-->
 <androidx.recyclerview.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

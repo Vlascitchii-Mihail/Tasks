@@ -17,14 +17,7 @@ const val PITCHING_LEADERS_FRAGMENT_INDEX = 1
 
 class LeadersFragment : Fragment() {
 
-    /**
-     * Display Views or Fragments in a swipeable format.
-     */
     private lateinit var leadersViewPager: ViewPager2
-
-    /**
-     * TabLayout provides a horizontal layout to display tabs
-     */
     private lateinit var leadersTabLayout: TabLayout
 
     override fun onCreateView(

@@ -7,8 +7,6 @@
  ! We make no guarantees that this code is fit for any purpose.
  ! Visit https://pragprog.com/titles/mfjetpack for more book information.
 -->
-
-<!--swipe down from the top to refresh-->
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,8 +15,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--tools:listitem="@layout/standings_team_item" - example of the item(element) for grid,
-item with information in RecyclerView-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/standingsList"
         android:layout_width="match_parent"

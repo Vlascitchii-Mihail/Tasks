@@ -15,8 +15,6 @@
     android:padding="16dp"
     android:background="@color/androidGreen">
 
-    <!--    android:scaleType="fitStart" - Controls how the image should be resized or moved to match the
-size of this ImageView. Гарантирует что изображение правильно помещается внутри своего контейнера -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="28dp"

@@ -22,8 +22,6 @@
             type="android.view.View.OnClickListener" />
     </data>
 
-    <!--android:onClick="@{clickListener}" - Name of the method in this View's
-context to invoke when the view is clicked.-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

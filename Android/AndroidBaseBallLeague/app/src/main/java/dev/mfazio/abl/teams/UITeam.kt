@@ -1,10 +1,11 @@
 package dev.mfazio.abl.teams
 
+import android.content.Context
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
+import androidx.palette.graphics.Palette
 import dev.mfazio.abl.R
 
-/**
- * team's colors, logo
- */
 data class UITeam(
     val team: Team,
     val logoId: Int,
@@ -19,10 +20,6 @@ data class UITeam(
     val division = team.division
 
     companion object {
-
-        /**
-         * list of the icons and colors of each team
-         */
         val allTeams = listOf(
             UITeam(Team.Appleton, R.drawable.fi_ic_fox, R.color.appletonPrimary, R.color.appletonSecondary, R.color.appletonTertiary),
             UITeam(Team.Baraboo, R.drawable.fi_ic_circus, R.color.barabooPrimary, R.color.barabooSecondary, R.color.barabooTertiary),
@@ -40,11 +37,18 @@ data class UITeam(
             UITeam(Team.WisconsinRapids, R.drawable.fi_ic_cranberry, R.color.wiRapidsPrimary, R.color.wiRapidsSecondary, R.color.wiRapidsTertiary)
         )
 
-        //@JvmStatic - Specifies that an additional static method needs to be generated from this element if it's a function.
-        // If this element is a property, additional static getter/setter methods should be generated
         @JvmStatic
         fun fromTeamId(teamId: String?) = allTeams.firstOrNull { uiTeam -> uiTeam.teamId == teamId }
 
         fun fromTeamIds(vararg teamIds: String) = teamIds.map { teamId -> fromTeamId(teamId) }
+
+        fun getTeamPalette(context: Context, teamId: String?) =
+            fromTeamId(teamId)?.let { team ->
+                ContextCompat.getDrawable(context, team.logoId)
+                    ?.toBitmap()
+                    ?.let { logoBitmap ->
+                        Palette.from(logoBitmap).generate()
+                    }
+            }
     }
 }

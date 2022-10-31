@@ -11,8 +11,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/leadersFragment">
-
+    app:startDestination="@id/scoreboardFragment">
     <action
         android:id="@+id/actionGoToTeam"
         app:destination="@id/singleTeamFragment">
@@ -23,7 +22,6 @@
             android:name="teamName"
             app:argType="string" />
     </action>
-
     <action
         android:id="@+id/actionGoToPlayer"
         app:destination="@id/singlePlayerFragment">
@@ -34,8 +32,33 @@
             android:name="playerName"
             app:argType="string" />
     </action>
-
-
+    <action
+        android:id="@+id/actionGoToTeamRoster"
+        app:destination="@id/playersFragment">
+        <argument
+            android:name="teamId"
+            app:argType="string" />
+    </action>
+    <fragment
+        android:id="@+id/aboutTheAppFragment"
+        android:name="dev.mfazio.abl.settings.AboutTheAppFragment"
+        android:label="@string/about_the_app"
+        tools:layout="@layout/fragment_about_the_app" />
+    <fragment
+        android:id="@+id/imageCreditsFragment"
+        android:name="dev.mfazio.abl.settings.ImageCreditsFragment"
+        android:label="@string/image_credits"
+        tools:layout="@layout/fragment_image_credits" />
+    <fragment
+        android:id="@+id/leadersFragment"
+        android:name="dev.mfazio.abl.leaders.LeadersFragment"
+        android:label="@string/leaders"
+        tools:layout="@layout/fragment_leaders" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="dev.mfazio.abl.notifications.NotificationsFragment"
+        android:label="@string/notifications"
+        tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/playersFragment"
         android:name="dev.mfazio.abl.players.PlayersFragment"
@@ -44,24 +67,12 @@
             android:name="teamId"
             android:defaultValue="@null"
             app:argType="string"
-            app:nulable="true"/>
+            app:nullable="true" />
     </fragment>
-
-
-    <action
-        android:id="@+id/actionGoToTeamRoster"
-        app:destination="@id/playersFragment">
-        <argument
-            android:name="teamId"
-            app:argType="string" />
-    </action>
-
     <fragment
-        android:id="@+id/leadersFragment"
-        android:name="dev.mfazio.abl.leaders.LeadersFragment"
-        android:label="@string/leaders"
-        tools:layout="@layout/fragment_leaders" />
-
+        android:id="@+id/settingsFragment"
+        android:name="dev.mfazio.abl.settings.SettingsFragment"
+        android:label="@string/settings"/>
     <fragment
         android:id="@+id/singlePlayerFragment"
         android:name="dev.mfazio.abl.players.SinglePlayerFragment"
@@ -75,23 +86,18 @@
             app:argType="string" />
         <deepLink app:uri="https://link.mfazio.dev/players/{playerId}?playerName={playerName}" />
     </fragment>
-
-
     <fragment
         android:id="@+id/scoreboardFragment"
         android:name="dev.mfazio.abl.scoreboard.ScoreboardFragment"
         android:label="@string/scoreboard" />
-
     <fragment
         android:id="@+id/standingsFragment"
         android:name="dev.mfazio.abl.standings.StandingsFragment"
         android:label="@string/standings" />
-
     <fragment
         android:id="@+id/teamsFragment"
         android:name="dev.mfazio.abl.teams.TeamsFragment"
         android:label="@string/teams" />
-
     <fragment
         android:id="@+id/singleTeamFragment"
         android:name="dev.mfazio.abl.teams.SingleTeamFragment"
@@ -105,5 +111,4 @@
             app:argType="string" />
         <deepLink app:uri="https://link.mfazio.dev/teams/{teamId}?teamName={teamName}" />
     </fragment>
-
 </navigation>

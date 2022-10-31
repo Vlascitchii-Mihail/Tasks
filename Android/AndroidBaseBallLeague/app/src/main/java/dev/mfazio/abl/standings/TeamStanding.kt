@@ -5,9 +5,6 @@ import androidx.room.PrimaryKey
 import dev.mfazio.abl.teams.Division
 import dev.mfazio.abl.teams.Team
 
-/**
- * data about teams' statistics
- */
 @Entity(tableName = "standings")
 data class TeamStanding(
     val teamId: String,

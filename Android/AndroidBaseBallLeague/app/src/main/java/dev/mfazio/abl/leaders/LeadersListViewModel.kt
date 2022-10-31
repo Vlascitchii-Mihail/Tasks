@@ -26,7 +26,6 @@ class LeadersListViewModel(application: Application) : AndroidViewModel(applicat
                 BaseballRepository.getInstance(db)
             }
 
-        //return batting leaders
         battingLeaders = Transformations.map(repo.getBattersWithStats()) { battersWithStats ->
             battingStatCategories.mapIndexed { index, handler ->
                 battersWithStats
@@ -78,15 +77,9 @@ class LeadersListViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    /**
-     * statistics in all the categories
-     */
     private val battingStatCategories = listOf(
         PlayerStatHandler(
             "AVG",
-
-            //sorting
-            //- (minus) from bigger to lower
             { batterA, batterB -> -batterA.stats.batterStats.battingAverage.compareTo(batterB.stats.batterStats.battingAverage) },
             { batter -> batter.stats.batterStats.battingAverage.toBattingPercentageString() }
         ),
@@ -164,9 +157,6 @@ class LeadersListViewModel(application: Application) : AndroidViewModel(applicat
         )
     )
 
-    /**
-     *statistics
-     */
     private data class PlayerStatHandler(
         val category: String,
         val statComparator: Comparator<PlayerWithStats>,

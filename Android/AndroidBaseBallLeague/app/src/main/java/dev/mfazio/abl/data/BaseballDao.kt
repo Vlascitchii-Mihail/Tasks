@@ -123,20 +123,23 @@ abstract class BaseballDao {
 
     @Query(
         """
-            SELECT * FROM player_list_items WHERE (:teamId IS NULL OR teamId = :teamId)
+            SELECT * FROM player_list_items
+            WHERE (:teamId IS NULL OR teamId = :teamId)
             AND (:nameQuery IS NULL OR playerName LIKE :nameQuery)
-            ORDERED BY playerId
+            ORDER BY playerId
         """
     )
+
     abstract fun getPlayerListItems(
         teamId: String? = null,
-        nameQuery: String? = null,
+        nameQuery: String? = null
     ): PagingSource<Int, PlayerListItem>
 
-    //What to do if a conflict happens.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertPlayerListItem(playerListItem: List<PlayerListItem>)
+    abstract suspend fun insertPlayerListItems(
+        playerListItems: List<PlayerListItem>
+    )
 
     @Query("DELETE FROM player_list_items")
-    abstract suspend fun deleteAllPlayersListItem()
+    abstract suspend fun deleteAllPlayerListItems()
 }

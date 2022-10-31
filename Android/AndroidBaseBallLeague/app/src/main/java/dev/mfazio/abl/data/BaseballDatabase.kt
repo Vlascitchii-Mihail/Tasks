@@ -15,19 +15,19 @@ import kotlinx.coroutines.launch
 @Database(
     entities = [
         Player::class,
-        PlayerStats::class,
-        ScheduledGame::class,
-        TeamStanding::class,
         PlayerListItem::class,
         PlayerKeys::class,
+        PlayerStats::class,
+        ScheduledGame::class,
+        TeamStanding::class
     ],
     exportSchema = false,
     version = 1
 )
-@TypeConverters(Converters::class)
+@TypeConverters(BaseballConverters::class)
 abstract class BaseballDatabase : RoomDatabase() {
     abstract fun baseballDao(): BaseballDao
-    abstract fun playerKeysDao(): PlayersKeysDao
+    abstract fun playerKeysDao(): PlayerKeysDao
 
     companion object {
         @Volatile

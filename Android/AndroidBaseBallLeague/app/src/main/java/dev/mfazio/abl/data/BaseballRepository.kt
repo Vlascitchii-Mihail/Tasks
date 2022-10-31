@@ -134,6 +134,28 @@ class BaseballRepository(
         }
     }
 
+    @ExperimentalPagingApi
+    fun getPlayerListItems(
+        teamId: String?,
+        nameQuery: String?
+    ): Flow<PagingData<PlayerListItem>> {
+        val dbNameQuery = if (nameQuery != null) "%$nameQuery%" else null
+        return Pager(
+            config = PagingConfig(
+                pageSize = defaultPageSize
+            ),
+            remoteMediator = PlayerListRemoteMediator(
+                apiService,
+                baseballDatabase,
+                teamId,
+                nameQuery
+            ),
+            pagingSourceFactory = {
+                baseballDao.getPlayerListItems(teamId, dbNameQuery)
+            }
+        ).flow
+    }
+
     enum class ResultStatus {
         Unknown,
         Success,
@@ -162,29 +184,6 @@ class BaseballRepository(
         } catch (ex: Exception) {
             ApiResult(status = ResultStatus.GeneralException)
         }
-
-    @ExperimentalPagingApi
-    fun getPlayerListItems(
-        teamId: String?,
-        nameQuery: String?
-    ): Flow<PagingData<PlayerListItem>> {
-        val dbNameQuery = if (nameQuery != null) "%$nameQuery%" else null
-
-        return Pager(
-            config = PagingConfig(
-                pageSize = defaultPageSize
-            ),
-            remoteMediator = PlayerListRemoteMediator(
-                apiService,
-                baseballDatabase,
-                teamId,
-                nameQuery
-            ),
-            pagingSourceFactory = {
-                baseballDao.getPlayerListItems(teamId, dbNameQuery)
-            }
-        ).flow
-    }
 
     companion object {
         private val apiService = getDefaultABLService()

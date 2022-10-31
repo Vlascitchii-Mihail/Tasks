@@ -1,8 +1,5 @@
 package dev.mfazio.abl.teams
 
-/**
- * contains information about teams
- */
 data class Team(
     val id: String,
     val city: String,
@@ -13,8 +10,6 @@ data class Team(
     val leagueRank: Int = -1,
     val divisionRank: Int = -1
 ) {
-
-    //all the teams
     companion object {
         val Appleton = Team("APL", "Appleton", "Foxes", Division.East)
         val Baraboo = Team("BOO", "Baraboo", "Big Tops", Division.West)

@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
+    //safe args
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {

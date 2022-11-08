@@ -24,9 +24,15 @@
             android:id="@+id/action_messageFragment_to_encryptFragment"
             app:destination="@id/encryptFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/encryptFragment"
         android:name="com.hfad.secretmessage.EncryptFragment"
         android:label="fragment_encrypt"
-        tools:layout="@layout/fragment_encrypt" />
+        tools:layout="@layout/fragment_encrypt" >
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </fragment>
 </navigation>

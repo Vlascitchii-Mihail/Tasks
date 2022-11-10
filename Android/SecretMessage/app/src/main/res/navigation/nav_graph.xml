@@ -15,6 +15,7 @@
             app:destination="@id/messageFragment" />
     </fragment>
 
+<!--    app:popUpTo="@id/welcomeFragment" delete the message fragment from back stack-->
     <fragment
         android:id="@+id/messageFragment"
         android:name="com.hfad.secretmessage.MessageFragment"
@@ -22,7 +23,8 @@
         tools:layout="@layout/fragment_message" >
         <action
             android:id="@+id/action_messageFragment_to_encryptFragment"
-            app:destination="@id/encryptFragment" />
+            app:destination="@id/encryptFragment"
+            app:popUpTo="@id/welcomeFragment" />
     </fragment>
 
 
@@ -32,7 +34,7 @@
         android:label="fragment_encrypt"
         tools:layout="@layout/fragment_encrypt" >
         <argument
-            android:name="message"
+            android:name="messageArg"
             app:argType="string" />
     </fragment>
 </navigation>

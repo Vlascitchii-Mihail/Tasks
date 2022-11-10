@@ -17,7 +17,7 @@
         android:text="@string/encrypt_text"/>
 
     <TextView
-        android:id="@+id/encryptedMessage"
+        android:id="@+id/encrypted_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

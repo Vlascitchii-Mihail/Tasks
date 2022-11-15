@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Guessing Game</string>
+    <string name="hello_blank_fragment">Hello</string>
+    <string name="guess_a_latter">Guess a latter</string>
+    <string name="guess">Guess</string>
+    <string name="start_new_game">Start new game</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

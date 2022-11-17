@@ -33,17 +33,22 @@ class GameFragment : Fragment() {
         //add a GameViewModel exemplar
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
 
-        viewModel.incorrectGuesses.observe(viewLifecycleOwner, Observer{ newValue ->
-            binding.incorrectGuesses.text = "Incorrect guess: $newValue"
-        })
+        binding.gameViewModel = viewModel
 
-        viewModel.livesLeft.observe(viewLifecycleOwner, Observer { newValue ->
-            binding.lives.text = "You have $newValue lives left."
-        })
+        //synchronizes the lifecycle of the binding.gameViewModel and GameViewModel object
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.secretWordDisplay.observe(viewLifecycleOwner, Observer { newValue ->
-            binding.word.text = newValue
-        })
+//        viewModel.incorrectGuesses.observe(viewLifecycleOwner, Observer{ newValue ->
+//            binding.incorrectGuesses.text = "Incorrect guess: $newValue"
+//        })
+
+//        viewModel.livesLeft.observe(viewLifecycleOwner, Observer { newValue ->
+//            binding.lives.text = "You have $newValue lives left."
+//        })
+
+//        viewModel.secretWordDisplay.observe(viewLifecycleOwner, Observer { newValue ->
+//            binding.word.text = newValue
+//        })
 
         viewModel.gameOver.observe(viewLifecycleOwner, Observer { newValue ->
             if (newValue) {

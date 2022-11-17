@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<!--add DataBinding-->
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ResultFragment">
+
+<!--    add a new variable-->
+    <data>
+        <variable
+            name="resultViewModel"
+            type="com.hfad.guessinggame.ResultViewModel"/>
+    </data>
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ResultFragment">
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -13,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="28sp"/>
+        android:textSize="28sp"
+        android:text="@{resultViewModel.result}"/>
 
     <Button
         android:id="@+id/new_game_button"
@@ -23,3 +35,5 @@
         android:text="@string/start_new_game"/>
 
 </LinearLayout>
+
+</layout>

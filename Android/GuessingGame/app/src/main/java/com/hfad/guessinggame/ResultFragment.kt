@@ -39,7 +39,7 @@ class ResultFragment : Fragment() {
         //get the ResultViewModel object
         viewModel = ViewModelProvider(this, viewModelFactory)[ResultViewModel::class.java]
 
-        binding.wonLost.text = viewModel.result
+        binding.resultViewModel = viewModel
 
         binding.newGameButton.setOnClickListener {
             view.findNavController().navigate(R.id.action_resultFragment_to_gameFragment)

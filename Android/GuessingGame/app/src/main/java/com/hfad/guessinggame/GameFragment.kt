@@ -68,3 +68,5 @@ class GameFragment : Fragment() {
         _binding = null
     }
 }
+
+//hello

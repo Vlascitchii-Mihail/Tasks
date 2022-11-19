@@ -5,11 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TaskFragment">
 
-    <data>
-        <variable
-            name=""
-            type="" />
-    </data>
 
     <LinearLayout
         android:layout_width="match_parent"

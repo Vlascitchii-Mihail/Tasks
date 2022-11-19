@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.hfad.tasks.databinding.FragmentTaskBinding
 
 /**
@@ -16,12 +17,16 @@ class TaskFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_task, container, false)
         _binding = FragmentTaskBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val application = requireNotNull(this.activity).application
+        val dao = TaskDatabase.getInstance(application).taskDao
+        val viewModelFactory = TaskViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
 
         return view
     }

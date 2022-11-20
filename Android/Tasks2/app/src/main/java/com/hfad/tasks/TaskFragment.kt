@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.hfad.tasks.databinding.FragmentTaskBinding
 
 /**
@@ -24,9 +25,16 @@ class TaskFragment : Fragment() {
         val view = binding.root
 
         val application = requireNotNull(this.activity).application
+        //get the database's object
         val dao = TaskDatabase.getInstance(application).taskDao
         val viewModelFactory = TaskViewModelFactory(dao)
+        //get a viewModel's object
         val viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
+
+        binding.viewModel = viewModel
+
+        //provides to update the binding.viewModel in layout
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return view
     }

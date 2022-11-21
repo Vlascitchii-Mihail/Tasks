@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.hfad.tasks.databinding.FragmentTaskBinding
@@ -35,6 +36,17 @@ class TaskFragment : Fragment() {
 
         //provides to update the binding.viewModel in layout
         binding.lifecycleOwner = viewLifecycleOwner
+
+
+        val adapter = TaskItemAdapter()
+        //connect the RecyclerView with TaskItemAdapter
+        binding.taskList.adapter = adapter
+
+        viewModel.tasks.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
 
         return view
     }

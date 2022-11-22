@@ -44,7 +44,9 @@ class TaskFragment : Fragment() {
 
         viewModel.tasks.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+
+                //add date to the ListAdapter's background list
+                adapter.submitList(it)
             }
         })
 

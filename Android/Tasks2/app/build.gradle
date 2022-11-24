@@ -4,6 +4,9 @@ plugins {
 
     //annotation for Room
     id 'kotlin-kapt'
+
+    //plugin for safe args
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -60,6 +63,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     //recycler card view
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //navigation
+    implementation"androidx.navigation:navigation-fragment-ktx:2.5.3"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

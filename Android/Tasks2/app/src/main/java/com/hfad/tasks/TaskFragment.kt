@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.hfad.tasks.databinding.FragmentTaskBinding
 
 /**
@@ -40,7 +41,8 @@ class TaskFragment : Fragment() {
 
 
         val adapter = TaskItemAdapter { taskId ->
-            Toast.makeText(context, "Clicked task $taskId", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Clicked task $taskId", Toast.LENGTH_SHORT).show()
+            viewModel.onTaskClicked(taskId)
         }
         //connect the RecyclerView with TaskItemAdapter
         binding.taskList.adapter = adapter
@@ -50,6 +52,14 @@ class TaskFragment : Fragment() {
 
                 //add date to the ListAdapter's background list
                 adapter.submitList(it)
+            }
+        })
+
+        viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId ->
+            taskId?.let {
+                val action = TaskFragmentDirections.actionTaskFragmentToEditTaskFragment(taskId)
+                this.findNavController().navigate(action)
+                viewModel.onTaskNavigated()
             }
         })
 

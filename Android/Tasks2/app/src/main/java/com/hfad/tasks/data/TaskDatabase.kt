@@ -1,4 +1,4 @@
-package com.hfad.tasks
+package com.hfad.tasks.data
 
 import android.content.Context
 import androidx.room.Database

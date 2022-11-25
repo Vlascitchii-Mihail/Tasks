@@ -1,16 +1,15 @@
-package com.hfad.tasks
+package com.hfad.tasks.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hfad.tasks.data.Task
 import com.hfad.tasks.databinding.TaskItemBinding
 
-class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit) : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(TaskDiffItemCallback()) {
+class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit) : ListAdapter<Task, TaskItemAdapter.TaskItemViewHolder>(
+    TaskDiffItemCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder =
         TaskItemViewHolder.inflateFrom(parent)

@@ -1,4 +1,4 @@
-package com.hfad.tasks
+package com.hfad.tasks.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

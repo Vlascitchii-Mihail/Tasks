@@ -5,4 +5,7 @@
     <string name="enter_a_task_name">Enter a task name</string>
     <string name="save_task">Save Task</string>
     <string name="checkbox_text">Done?</string>
+    <string name="update_task">Update task</string>
+    <string name="task_is_done">Task is done</string>
+    <string name="delete_task">Delete task</string>
 </resources>

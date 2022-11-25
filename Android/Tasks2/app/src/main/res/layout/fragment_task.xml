@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TaskFragment">
+    tools:context=".fragment.TaskFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.hfad.tasks.TasksViewModel" />
+            type="com.hfad.tasks.viewModel.TasksViewModel" />
     </data>
 
     <LinearLayout

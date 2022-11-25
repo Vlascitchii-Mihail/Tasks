@@ -1,9 +1,11 @@
-package com.hfad.tasks
+package com.hfad.tasks.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hfad.tasks.data.Task
+import com.hfad.tasks.data.TaskDao
 import kotlinx.coroutines.launch
 
 class TasksViewModel(val dao: TaskDao): ViewModel() {
